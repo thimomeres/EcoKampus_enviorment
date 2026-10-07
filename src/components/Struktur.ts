@@ -1,4 +1,11 @@
-import { KOORDINATOR, UNITS, memberCount, photoFor, type Member } from "../data/struktur";
+import "../styles/struktur-anim.css";
+import {
+  KOORDINATOR,
+  UNITS,
+  memberCount,
+  photoFor,
+  type Member,
+} from "../data/struktur";
 import { escapeHtml } from "../utils/format";
 
 export const STRUKTUR_HASH = "#/struktur";
@@ -46,7 +53,13 @@ export function renderStrukturPage(): string {
 
   return `
     <section class="section-content struktur-page" aria-labelledby="struktur-title">
-      <a class="struktur-back" href="#kontak">← Kembali ke Kontak</a>
+      <nav class="struktur-bar" aria-label="Navigasi halaman">
+        <a class="struktur-back" href="#kontak">
+          <span class="struktur-back__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg></span>
+          <span class="struktur-back__text">Kembali ke Kontak</span>
+        </a>
+        <span class="struktur-bar__crumb">Kontak / Struktur Divisi</span>
+      </nav>
       <header class="section-heading">
         <h2 id="struktur-title">Struktur Divisi Lingkungan Hidup</h2>
         <p>Bagan hierarki Divisi Lingkungan Hidup BEM Universitas Klabat.</p>
@@ -56,13 +69,13 @@ export function renderStrukturPage(): string {
         <div class="org__stem" aria-hidden="true"></div>
         <div class="org__branches">${units}</div>
       </div>
-      <p class="struktur-note">Foto sementara. Ganti dengan foto asli di <code>src/assets/Image/struktur/</code>.</p>
     </section>`;
 }
 
 function popupHtml(): string {
   const items = UNITS.map(
-    (unit) => `<li><span>${escapeHtml(unit.title)}</span><strong>${unit.members.length} orang</strong></li>`,
+    (unit) =>
+      `<li><span>${escapeHtml(unit.title)}</span><strong>${unit.members.length} orang</strong></li>`,
   ).join("");
   return `
     <div id="struktur-popup" class="struktur-popup" hidden role="dialog" aria-modal="true" aria-labelledby="struktur-popup-title">
@@ -115,7 +128,9 @@ export function initStruktur(): void {
     if (popup.hidden) return;
     if (event.key === "Escape") closePopup();
     if (event.key === "Tab") {
-      const items = Array.from(popup.querySelectorAll<HTMLElement>("button, a[href]"));
+      const items = Array.from(
+        popup.querySelectorAll<HTMLElement>("button, a[href]"),
+      );
       const first = items[0];
       const last = items[items.length - 1];
       if (event.shiftKey && document.activeElement === first) {
@@ -136,13 +151,23 @@ export function initStruktur(): void {
     document.title = onStruktur ? PAGE_TITLE : originalTitle;
     if (onStruktur) {
       closePopup();
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant" as ScrollBehavior,
+      });
     } else if (wasStruktur) {
       // Kembali ke halaman utama: lompat ke bagian yang dituju (mis. #kontak, #berita).
       const id = window.location.hash.slice(1);
       const target = id ? document.getElementById(id) : null;
-      if (target) target.scrollIntoView({ behavior: "instant" as ScrollBehavior });
-      else window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+      if (target)
+        target.scrollIntoView({ behavior: "instant" as ScrollBehavior });
+      else
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "instant" as ScrollBehavior,
+        });
     }
     // Hitung ulang animasi AOS dan posisi menu aktif setelah tampilan berganti.
     window.dispatchEvent(new Event("resize"));

@@ -1,0 +1,230 @@
+/* ===== Animasi halaman struktur (jalan setiap halaman dibuka) ===== */
+.struktur-page {
+  position: relative;
+  overflow: hidden;
+}
+
+.struktur-bar,
+.struktur-page .section-heading,
+.org {
+  position: relative;
+  z-index: 1;
+}
+
+/* Judul: masuk dari bawah, garis hijau-kuning memanjang */
+.struktur-page .section-heading {
+  animation: org-rise 0.7s ease-out 0.1s both;
+}
+
+.struktur-page .section-heading h2 {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.struktur-page .section-heading h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  transform-origin: left;
+  animation: org-line-x 0.9s cubic-bezier(0.65, 0, 0.25, 1) 0.5s both;
+}
+
+.struktur-bar {
+  animation: org-rise 0.5s ease-out both;
+}
+
+/* Daun melayang di latar */
+.org-leaves {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.org-leaves span {
+  position: absolute;
+  top: -30px;
+  font-size: 1.4rem;
+  opacity: 0;
+  animation: org-leaf 11s linear infinite;
+}
+
+.org-leaves span:nth-child(1) { left: 6%;  animation-delay: 0.2s; }
+.org-leaves span:nth-child(2) { left: 22%; animation-delay: 3.5s; font-size: 1.1rem; }
+.org-leaves span:nth-child(3) { left: 41%; animation-delay: 6s; }
+.org-leaves span:nth-child(4) { left: 60%; animation-delay: 1.8s; font-size: 1.1rem; }
+.org-leaves span:nth-child(5) { left: 78%; animation-delay: 4.6s; }
+.org-leaves span:nth-child(6) { left: 92%; animation-delay: 8s; font-size: 1.2rem; }
+
+/* Koordinator: jatuh dengan pantulan, cincin berdenyut */
+.org__root .org-person {
+  animation: org-drop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+}
+
+.org__root .org-avatar {
+  animation: org-ring 2.4s ease-out 1.3s infinite;
+}
+
+/* Garis batang tumbuh ke bawah + titik cahaya mengalir */
+.org__stem {
+  position: relative;
+  transform-origin: top;
+  animation: org-line-y 0.6s ease-out 1s both;
+}
+
+.org__stem::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  box-shadow: 0 0 10px 3px rgba(251, 192, 45, 0.8);
+  opacity: 0;
+  animation: org-flow 2.2s ease-in-out 1.8s infinite;
+}
+
+/* Garis mendatar memanjang dari tengah (desktop) */
+@media (min-width: 900px) {
+  .org__branches::before {
+    transform-origin: center;
+    animation: org-line-x 0.7s ease-out 1.5s both;
+  }
+}
+
+.org__branch::before {
+  transform-origin: top;
+  animation: org-line-y 0.4s ease-out 1.9s both;
+}
+
+/* Tiap bidang muncul bergantian */
+.org__branch {
+  animation: org-rise 0.7s ease-out both;
+}
+
+.org__branch:nth-child(1) { animation-delay: 1.9s; }
+.org__branch:nth-child(2) { animation-delay: 2.1s; }
+.org__branch:nth-child(3) { animation-delay: 2.3s; }
+
+.org__unit-title {
+  position: relative;
+  overflow: hidden;
+}
+
+.org__unit-title::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: org-shine 3.5s ease-in-out 3s infinite;
+}
+
+/* Anggota: muncul membesar bergantian */
+.org__members .org-person {
+  animation: org-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.org__branch:nth-child(1) .org-person:nth-child(1) { animation-delay: 2.4s; }
+.org__branch:nth-child(1) .org-person:nth-child(2) { animation-delay: 2.55s; }
+.org__branch:nth-child(2) .org-person:nth-child(1) { animation-delay: 2.6s; }
+.org__branch:nth-child(2) .org-person:nth-child(2) { animation-delay: 2.75s; }
+.org__branch:nth-child(3) .org-person:nth-child(1) { animation-delay: 2.8s; }
+.org__branch:nth-child(3) .org-person:nth-child(2) { animation-delay: 2.95s; }
+
+/* Hover: kartu terangkat, foto membesar, cincin kuning */
+.org-person {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.org-person:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(46, 125, 50, 0.22);
+}
+
+.org-avatar {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.org-person:hover .org-avatar {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 0 0 0 4px var(--color-secondary), 0 8px 18px rgba(46, 125, 50, 0.3);
+}
+
+@keyframes org-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes org-drop {
+  0%   { opacity: 0; transform: translateY(-60px) scale(0.85); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes org-pop {
+  0%   { opacity: 0; transform: scale(0.6) translateY(16px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes org-line-x {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes org-line-y {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes org-flow {
+  0%   { top: 0; opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes org-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(251, 192, 45, 0.7), 0 4px 14px rgba(46, 125, 50, 0.25); }
+  100% { box-shadow: 0 0 0 22px rgba(251, 192, 45, 0), 0 4px 14px rgba(46, 125, 50, 0.25); }
+}
+
+@keyframes org-shine {
+  0%, 60% { transform: translateX(-120%); }
+  100%    { transform: translateX(120%); }
+}
+
+@keyframes org-leaf {
+  0%   { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  10%  { opacity: 0.8; }
+  50%  { transform: translate(28px, 45vh) rotate(160deg); }
+  90%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translate(-20px, 95vh) rotate(340deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .org-leaves { display: none; }
+
+  .struktur-bar,
+  .struktur-page .section-heading,
+  .struktur-page .section-heading h2::after,
+  .org__root .org-person,
+  .org__root .org-avatar,
+  .org__stem,
+  .org__stem::after,
+  .org__branches::before,
+  .org__branch,
+  .org__branch::before,
+  .org__unit-title::after,
+  .org__members .org-person {
+    animation: none !important;
+  }
+}

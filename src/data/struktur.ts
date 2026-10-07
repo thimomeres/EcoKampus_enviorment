@@ -16,7 +16,7 @@ export interface Unit {
 }
 
 export const KOORDINATOR: Member = {
-  id: "keysia-dillak",
+  id: "Kesya_kordi",
   name: "Keysia Dillak",
   role: "Koordinator Lingkungan Hidup",
 };
@@ -27,33 +27,36 @@ export const UNITS: Unit[] = [
     id: "program-operasional",
     title: "Program & Operasional",
     members: [
-      { id: "jesi-sianturi", name: "Jesi Sianturi", role: "Anggota" },
-      { id: "gerard-luden", name: "Gerard Luden", role: "Anggota" },
+      { id: "Jesi_PO", name: "Jesi Sianturi", role: "Anggota" },
+      { id: "Gerad_PO", name: "Gerard Luden", role: "Anggota" },
     ],
   },
   {
     id: "logistik",
     title: "Logistik",
     members: [
-      { id: "yemima-simbage", name: "Yemima Simbage", role: "Anggota" },
-      { id: "jonathan-tuuk", name: "Jonathan Tuuk", role: "Anggota" },
+      { id: "Yemmia_Logis", name: "Yemima Simbage", role: "Anggota" },
+      { id: "Jonathn_logis", name: "Jonathan Tuuk", role: "Anggota" },
     ],
   },
   {
     id: "administrasi-event",
     title: "Administrasi & Event",
     members: [
-      { id: "anggun-sasue", name: "Anggun Sasue", role: "Anggota" },
-      { id: "natania-johannis", name: "Natania Johannis", role: "Anggota" },
+      { id: "Anggun_admisitrasi", name: "Anggun Sasue", role: "Anggota" },
+      { id: "Natania_Administrasi", name: "Natania Johannis", role: "Anggota" },
     ],
   },
 ];
 
-const photoModules = import.meta.glob("../assets/Image/struktur/*.{jpg,jpeg,png,webp}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
+const photoModules = import.meta.glob(
+  "../assets/Image/Struktur/*.{jpg,jpeg,png,webp}",
+  {
+    eager: true,
+    query: "?url",
+    import: "default",
+  },
+) as Record<string, string>;
 
 /** Cari foto berdasarkan id anggota (nama file tanpa ekstensi). */
 export function photoFor(id: string): string | null {
