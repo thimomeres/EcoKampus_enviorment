@@ -178,7 +178,7 @@ export function initGameMusic(): void {
     anchor.parentElement?.insertBefore(root as HTMLElement, anchor.nextSibling);
     if (reset && phase() !== "intro") resetToIntro();
     syncMusic();
-    section.querySelector<HTMLElement>(".game-start")?.focus({ preventScroll: true });
+    (section as HTMLElement).querySelector<HTMLElement>(".game-start")?.focus({ preventScroll: true });
   }
 
   document.addEventListener("click", (event) => {
