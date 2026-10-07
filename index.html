@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="EcoKampus — portal pemilahan dan pengelolaan sampah kampus Divisi Lingkungan Hidup BEM Universitas Klabat."
+    />
+    <meta name="theme-color" content="#2E7D32" />
+    <title>EcoKampus - BEM Divisi Lingkungan Hidup</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-brand">
+        <a href="#home" class="header-site">
+          <img
+            id="logo-campus"
+            src=""
+            alt="Logo Universitas Klabat"
+            class="header-site__logo"
+          />
+          <span class="header-site__title"
+            >Eco<span class="header-site__accent">Kampus</span></span
+          >
+        </a>
+      </div>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <nav id="main-nav">
+        <ul>
+          <li><a href="#home">Beranda</a></li>
+          <li><a href="#tentang">Tentang</a></li>
+          <li><a href="#lokasi">Lokasi Sampah</a></li>
+          <li><a href="#berita">Berita</a></li>
+          <li><a href="#game">Game Play</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="app-content"></main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
