@@ -31,8 +31,8 @@ export interface TrashPoint {
 
 // Pusat kampus Universitas Klabat, Airmadidi (rata-rata ketiga titik tong).
 export const CAMPUS_CENTER: { lat: number; lng: number; zoom: number } = {
-  lat: 1.41766,
-  lng: 124.984336,
+  lat: 1.41788,
+  lng: 124.983803,
   zoom: 17,
 };
 
@@ -62,15 +62,15 @@ export const trashPoints: TrashPoint[] = [
     photo: "gedung-kuliah-1.jpg",
   },
   {
-    id: "study-garden",
-    name: "Study Garden",
-    description: "Tong sampah organik dan anorganik di area Study Garden.",
-    lat: 1.4166481,
-    lng: 124.9843365,
+    id: "gedung-kuliah-3",
+    name: "Gedung Kuliah 3",
+    description: "Tong sampah organik dan anorganik di area Gedung Kuliah 3.",
+    lat: 1.4173043,
+    lng: 124.9827366,
     types: ["organik", "anorganik"],
     accuracy: "tepat",
     verified: true,
-    photo: "study-garden.jpg",
+    photo: "gedung-kuliah-3.jpg",
   },
   // TODO: tambah titik baru di sini
 ];

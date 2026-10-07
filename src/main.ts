@@ -4,6 +4,7 @@ import "./styles/berita.css";
 import "./styles/kontak.css";
 import "./styles/lokasi.css";
 import "./styles/game.css";
+import "./styles/gamemusic.css";
 import "./styles/struktur.css";
 import "./styles/intro.css";
 import AOS from "aos";
@@ -12,14 +13,18 @@ import logoCampus from "./assets/Image/logounklab.png";
 import { initHeroSlider, renderBeranda } from "./components/Beranda";
 import { renderTentang } from "./components/about";
 import { initBerita, initHomeNews, renderBerita } from "./components/Berita";
+import { initBeritaMore } from "./components/BeritaMore";
 import { initLokasi, renderLokasi } from "./components/Lokasi";
 import { initGame, renderGame } from "./components/Game";
+import { initGameMusic } from "./components/GameMusic";
 import { initKontak, renderKontak } from "./components/Kontak";
 import { renderFooter } from "./components/Footer";
 import { initIntro } from "./components/Intro";
+import { addIntroTagline } from "./components/IntroTagline";
 import { initStruktur, renderStrukturPage } from "./components/Struktur";
 
 initIntro();
+addIntroTagline();
 
 const logoCampusEl = document.getElementById(
   "logo-campus",
@@ -44,11 +49,13 @@ if (appContent) {
   initKontak();
   initLokasi();
   initGame();
+  initGameMusic();
   initHomeNews();
   initStruktur();
   initBerita(() => {
     AOS.refresh();
   });
+  initBeritaMore();
 }
 
 const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -117,6 +124,17 @@ function initScrollSpy(): void {
   // Menu aktif = bagian terakhir yang sudah melewati garis di ±30% tinggi layar.
   // Dihitung dari posisi scroll, jadi tetap akurat walau tinggi bagian berubah (berita dimuat, animasi AOS).
   const update = (): void => {
+    // Halaman struktur terbuka: tandai menu "Struktur", abaikan posisi scroll bagian utama.
+    if (window.location.hash === "#/struktur") {
+      links.forEach((link) => {
+        const active = link.getAttribute("href") === "#/struktur";
+        link.classList.toggle("is-active", active);
+        if (active) link.setAttribute("aria-current", "page");
+        else link.removeAttribute("aria-current");
+      });
+      current = null;
+      return;
+    }
     const header = document.querySelector<HTMLElement>("body > header");
     const line = (header?.offsetHeight ?? 80) + window.innerHeight * 0.3;
     let active = items[0];
@@ -141,6 +159,7 @@ function initScrollSpy(): void {
   window.addEventListener("scroll", schedule, { passive: true });
   window.addEventListener("resize", schedule);
   window.addEventListener("load", schedule);
+  window.addEventListener("hashchange", schedule);
   const content = document.getElementById("app-content");
   if (content && "ResizeObserver" in window) new ResizeObserver(schedule).observe(content);
   links.forEach((link) => link.addEventListener("click", () => setActive(link)));

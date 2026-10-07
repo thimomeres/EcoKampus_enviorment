@@ -11,7 +11,7 @@ export interface ContactInfo {
 
 // TODO: ganti dengan data asli Divisi Lingkungan Hidup BEM UNKLAB
 export const CONTACT: ContactInfo = {
-  picName: "PIC Divisi Lingkungan Hidup (dummy)",
+  picName: "PIC Divisi Lingkungan Hidup",
   email: "keysiadillak@gmail.com",
   whatsappDisplay: "0896-6220-4330",
   whatsappE164: "6289662204330",

@@ -1,0 +1,3 @@
+Taruh file musik game di folder ini (.mp3 / .ogg / .wav / .m4a).
+Musik otomatis diputar saat tombol "Mulai main" ditekan di game Pilah Sampah.
+Nama file bebas. Berkas ini boleh dihapus.

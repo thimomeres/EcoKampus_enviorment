@@ -1,0 +1,144 @@
+body.game-lock {
+  overflow: hidden;
+}
+
+/* Popup game */
+.game-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+}
+
+.game-popup[hidden] {
+  display: none;
+}
+
+.game-popup__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 40, 18, 0.72);
+  backdrop-filter: blur(2px);
+}
+
+.game-popup__panel {
+  outline: none;
+  position: relative;
+  z-index: 1;
+  width: min(100%, 780px);
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-light, #f4f9f4);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  animation: game-popup-in 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.game-popup__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.game-popup__bar h3 {
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.game-popup__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.game-popup__music {
+  font: 600 0.8rem "Poppins", sans-serif;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.game-popup__music:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.game-popup__music.is-playing {
+  border-color: var(--color-secondary);
+  animation: game-music-pulse 1.6s ease-in-out infinite;
+}
+
+.game-popup__close {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.game-popup__close:hover {
+  background: var(--color-secondary);
+  color: #1b5e20;
+  transform: rotate(90deg);
+}
+
+.game-popup__body {
+  overflow: auto;
+  padding: 14px;
+}
+
+.game-popup__body .game-card {
+  margin: 0 auto;
+  box-shadow: none;
+}
+
+@keyframes game-popup-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes game-music-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 192, 45, 0.55); }
+  50%      { box-shadow: 0 0 0 7px rgba(251, 192, 45, 0); }
+}
+
+@media (max-width: 480px) {
+  .game-popup {
+    padding: 0;
+  }
+
+  .game-popup__panel {
+    max-height: 100vh;
+    height: 100%;
+    border-radius: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-popup__panel,
+  .game-popup__music.is-playing {
+    animation: none;
+  }
+}

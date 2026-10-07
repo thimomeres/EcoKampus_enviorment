@@ -15,7 +15,6 @@ const FILTERS: Array<{ id: Filter; label: string }> = [
   { id: "all", label: "Semua" },
   { id: "organik", label: BIN_META.organik.label },
   { id: "anorganik", label: BIN_META.anorganik.label },
-  { id: "b3", label: BIN_META.b3.label },
 ];
 
 // Foto opsional: taruh file di src/assets/Image/lokasi/. Jika folder kosong, tidak ada error.

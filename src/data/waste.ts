@@ -63,6 +63,6 @@ export const WORK_PROGRAMS: WorkProgram[] = [
     id: "waste-to-resource",
     name: "From Waste to Resource",
     summary:
-      "Workshop bersama fakultas pertanian tentang lingkungan: mengubah cara pandang sampah dari beban menjadi sumber daya.",
+      "Workshop bersama fakultas pertanian dan Mapala tentang lingkungan: mengubah cara pandang sampah dari beban menjadi sumber daya.",
   },
 ];

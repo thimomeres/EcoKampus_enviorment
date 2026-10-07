@@ -1,5 +1,6 @@
 import { CONTACT } from "../data/contact";
 import { escapeHtml } from "../utils/format";
+import { FORM_CC, FORM_TO } from "../data/formRecipients";
 import { renderStrukturCard } from "./Struktur";
 
 function waLink(text: string): string {
@@ -21,6 +22,10 @@ export function renderKontak(): string {
             <li>
               <span aria-hidden="true">☎</span>
               <a href="${waLink("Halo EcoKampus, saya ingin bertanya.")}" target="_blank" rel="noopener noreferrer">${escapeHtml(CONTACT.whatsappDisplay)}</a>
+            </li>
+            <li>
+              <span aria-hidden="true">✉</span>
+              <a href="mailto:${escapeHtml(CONTACT.email)}">${escapeHtml(CONTACT.email)}</a>
             </li>
             <li>
               <span aria-hidden="true">◎</span>
@@ -86,7 +91,7 @@ export function initKontak(): void {
       submit.textContent = "Mengirim...";
     }
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(CONTACT.email)}`, {
+      const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(FORM_TO)}`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
@@ -94,14 +99,17 @@ export function initKontak(): void {
           _subject: "[EcoKampus] Pesan baru dari website",
           _template: "table",
           _captcha: "false",
+          _cc: FORM_CC,
         }),
       });
-      const data = (await res.json().catch(() => ({}))) as { success?: string | boolean };
-      if (!res.ok || String(data.success) === "false") throw new Error("gagal");
+      const data = (await res.json().catch(() => ({}))) as { success?: string | boolean; message?: string };
+      if (!res.ok || String(data.success) === "false") throw new Error(data.message || `HTTP ${res.status}`);
       setStatus("Terima kasih! Pesan Anda sudah terkirim ke Divisi Lingkungan Hidup.", "ok");
       form.reset();
-    } catch {
-      setStatus("Pesan belum terkirim. Coba lagi sebentar, atau kirim lewat WhatsApp.", "error");
+    } catch (error) {
+      const detail = error instanceof Error && error.message ? ` (${error.message})` : "";
+      console.warn("Kirim pesan gagal:", error);
+      setStatus(`Pesan belum terkirim${detail}. Coba lagi sebentar, atau kirim lewat WhatsApp.`, "error");
     } finally {
       if (submit) {
         submit.disabled = false;
