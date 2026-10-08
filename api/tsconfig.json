@@ -1,0 +1,4 @@
+{
+  "extends": "../tsconfig.node.json",
+  "include": ["./*.ts", "../server/*.ts", "../src/types/*.ts", "../src/data/curatedNews.ts"]
+}

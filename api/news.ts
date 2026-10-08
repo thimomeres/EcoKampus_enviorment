@@ -25,7 +25,8 @@ export default async function handler(
     res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=600");
     res.setHeader("Content-Type", "application/json; charset=utf-8");
     res.status(200).json(payload);
-  } catch {
-    res.status(500).json({ error: "Gagal memuat berita" });
+  } catch (error) {
+    const detail = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+    res.status(500).json({ error: "Gagal memuat berita", detail });
   }
 }
