@@ -1,4 +1,4 @@
-import { fetchNewsFeed } from "../server/newsHandler.ts";
+import { fetchNewsFeed } from "../server/newsHandler.js";
 
 interface ApiRequest {
   method?: string;

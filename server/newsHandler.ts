@@ -4,8 +4,8 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { XMLParser } from "fast-xml-parser";
 import type { Article, NewsCategory, NewsPayload } from "../src/types/news.ts";
-import { CURATED_NEWS } from "../src/data/curatedNews.ts";
-import { fetchDirectFeeds } from "./directFeeds.ts";
+import { CURATED_NEWS } from "../src/data/curatedNews.js";
+import { fetchDirectFeeds } from "./directFeeds.js";
 
 interface SearchQuery {
   category: NewsCategory;
